@@ -1,21 +1,26 @@
-const SnippetModel = require("../models/snippetModel");
+const snippetModel = require("../models/snippetModel");
 
-// Create
+// Create [v]
 exports.postOneSnippet = async (req, res) => {
   try {
     const { title, description, code } = req.body;
-    console.log(req.body);
+    // validation
+    if (!description && !code) {
+      return res.json({
+        errorMessage: "You need to enter at least a description or some code.",
+      });
+    }
 
-    const newSnippet = new SnippetModel({
+    const newSnippet = new snippetModel({
       title,
       description,
       code,
     });
 
-    await newSnippet.save();
-
-    res.json(newSnippet);
+    const savedSnippet = await newSnippet.save();
+    res.json(savedSnippet);
   } catch (error) {
+    console.log(error);
     res.json({
       controller: "postOneSnippet",
       success: false,
@@ -23,9 +28,11 @@ exports.postOneSnippet = async (req, res) => {
     });
   }
 };
-// Read
-exports.getAllSnippets = (req, res) => {
+// Read [v]
+exports.getAllSnippets = async (req, res) => {
   try {
+    const snippets = await snippetModel.find();
+    res.json(snippets);
   } catch (error) {
     res.json({
       controller: "getAllSnippets",
@@ -34,9 +41,35 @@ exports.getAllSnippets = (req, res) => {
     });
   }
 };
-// Update
-exports.updateOneSnippet = (req, res) => {
+// Update [v]
+exports.updateOneSnippet = async (req, res) => {
   try {
+    const { title, description, code } = req.body;
+    const snippetId = req.params.id;
+
+    // validation
+    if (!description && !code) {
+      return res.json({
+        errorMessage: "You need to enter at least a description or some code.",
+      });
+    }
+    if (!snippetId) {
+      return res.json({ errorMessage: "Snippet ID not given." });
+    }
+
+    const originalSnippet = await snippetModel.findById(snippetId);
+    if (!originalSnippet) {
+      return res.json({
+        errorMessage: "No snippet ID",
+      });
+    }
+
+    originalSnippet.title = title;
+    originalSnippet.description = description;
+    originalSnippet.code = code;
+
+    const updatedSnippet = await originalSnippet.save();
+    res.json(updatedSnippet);
   } catch (error) {
     res.json({
       controller: "updateOneSnippet",
@@ -45,10 +78,27 @@ exports.updateOneSnippet = (req, res) => {
     });
   }
 };
-// Delete
-exports.deleteOneSnippet = (req, res) => {
+// Delete [v]
+exports.deleteOneSnippet = async (req, res) => {
   try {
+    // validation
+    const snippetId = req.params.id;
+
+    if (!snippetId) {
+      return res.json({ errorMessage: "Snippet ID not given." });
+    }
+
+    const existingSnippet = await snippetModel.findById(snippetId);
+    if (!existingSnippet) {
+      return res.json({
+        errorMessage: "No snippet ID",
+      });
+    }
+
+    await existingSnippet.delete();
+    res.json(existingSnippet);
   } catch (error) {
+    console.log(error);
     res.json({
       controller: "deleteOneSnippet",
       success: false,

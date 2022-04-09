@@ -1,11 +1,14 @@
 const router = require("express").Router();
-const { postOneSnippet } = require("../controller/snippetController");
+const {
+  postOneSnippet,
+  getAllSnippets,
+  updateOneSnippet,
+  deleteOneSnippet,
+} = require("../controller/snippetController");
 
 router.post("/", postOneSnippet);
-
-router.get("/test", (req, res) => {
-  res.send("Router test");
-  console.log("라우터 테스트 동작");
-});
+router.get("/", getAllSnippets);
+router.put("/:id", updateOneSnippet);
+router.delete("/:id", deleteOneSnippet);
 
 module.exports = router;
