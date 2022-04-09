@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 
 function Home() {
-  return <>홈페이지</>;
+  const [snippets, setSnippets] = useState([]);
+
+  useEffect(() => {
+    //get snippets
+    getAllSnippets();
+  }, []);
+
+  async function getAllSnippets() {
+    const snippetsRes = await Axios.get("http://localhost:3000/snippet");
+    console.log(snippetsRes);
+  }
+
+  return <>홈페이지 이다</>;
 }
 export default Home;

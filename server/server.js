@@ -16,7 +16,7 @@ app.use(express.json());
 // cors 쓰는 이유 : react 프론트에게 api 콜 보내게 하려고
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://snippetmanager.netlify.app"],
+    origin: "http://localhost:3001",
     credentials: true,
   })
 );
@@ -25,7 +25,7 @@ app.use(
 //쿠키의 개념 차차 더 익혀보자.
 app.use(cookieParser());
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 // set up routers
