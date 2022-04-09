@@ -12,6 +12,7 @@ function Home() {
   async function getAllSnippets() {
     const snippetsRes = await Axios.get("http://localhost:3000/snippet");
     console.log(snippetsRes);
+    setSnippets(snippetsRes.data);
   }
 
   return <>홈페이지 이다</>;

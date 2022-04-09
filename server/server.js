@@ -13,7 +13,7 @@ const app = express();
 // express josn 쓰는 이유 : json으로 들어오는 데이터 서버에서 보이게 하려고
 app.use(express.json());
 
-// cors 쓰는 이유 : react 프론트에게 api 콜 보내게 하려고
+// cors 쓰는 이유 : react 프론트와 API 연결하려고
 app.use(
   cors({
     origin: "http://localhost:3001",
