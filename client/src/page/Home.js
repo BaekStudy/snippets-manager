@@ -23,7 +23,7 @@ function Home() {
   return (
     <div className="home">
       <p>홈페이지</p>
-      <div className="snippets">{spreadSnippets()}</div>
+      <div className="snippetsContainer">{spreadSnippets()}</div>
     </div>
   );
 }
