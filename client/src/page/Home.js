@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
 function Home() {
-  const [snippets, setSnippets] = useState([]);
+  const [snippets, setSnippets] = useState();
 
   useEffect(() => {
-    //get snippets
     getAllSnippets();
   }, []);
 
@@ -15,6 +14,26 @@ function Home() {
     setSnippets(snippetsRes.data);
   }
 
-  return <>홈페이지 이다</>;
+  function spreadSnippets() {
+    return snippets.map((snippet, i) => {
+      return <Snippet snippet={snippet} key={i} />;
+    });
+  }
+
+  return (
+    <div className="home">
+      <p>홈페이지</p>
+      <div className="snippets">{spreadSnippets()}</div>
+    </div>
+  );
 }
+
+function Snippet(props) {
+  return (
+    <div className="snippet">
+      {props.snippet.title && <h2>{props.snippet.title}</h2>}
+    </div>
+  );
+}
+
 export default Home;
