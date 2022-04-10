@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
+//홈 콤포넌트
 function Home() {
   const [snippets, setSnippets] = useState();
 
@@ -28,6 +29,7 @@ function Home() {
   );
 }
 
+// 스니핏 콤포넌트
 function Snippet(props) {
   return (
     <div className="snippet">
