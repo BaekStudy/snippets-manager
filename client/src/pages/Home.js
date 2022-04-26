@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Snippet from "../components/Snippet";
 import Axios from "axios";
 
 //홈 콤포넌트
@@ -28,28 +29,5 @@ function Home() {
     </div>
   );
 }
-
-// 스니핏 콤포넌트
-function Snippet({ snippet, ...props }) {
-  return (
-    <div className="snippet">
-      {snippet.title && <h2>{snippet.title}</h2>}
-      {snippet.description && <p>{snippet.description}</p>}
-      {snippet.code && <p>{snippet.code}</p>}
-      <hr />
-    </div>
-  );
-}
-
-/* 비구조화 할당
-function SnippetPropsMethod({...props}) {
-  return (
-    <div className="snippet">
-      {props.snippet.title && <h2>{props.snippet.title}</h2>}
-      {props.snippet.description && <p>{props.snippet.description}</p>}
-    </div>
-  );
-}
-*/
 
 export default Home;
