@@ -18,7 +18,9 @@ function Home() {
 
   function spreadSnippets() {
     return snippets.map((snippet, i) => {
-      return <Snippet snippet={snippet} key={i} />;
+      return (
+        <Snippet 속성아무거나="속성아무거나줌" snippet={snippet} key={i} />
+      );
     });
   }
 

@@ -1,4 +1,5 @@
 // 스니핏 콤포넌트
+
 function Snippet({ snippet, ...props }) {
   return (
     <div className="snippet">
@@ -9,6 +10,20 @@ function Snippet({ snippet, ...props }) {
     </div>
   );
 }
+
+/*
+function Snippet({ snippet, 속성아무거나, ...props }) {
+  return (
+    <div className="snippet">
+      {속성아무거나}
+      {snippet.title && <h2>{snippet.title}</h2>}
+      {snippet.description && <p>{snippet.description}</p>}
+      {snippet.code && <p>{snippet.code}</p>}
+      <hr />
+    </div>
+  );
+}
+*/
 
 //비구조화 할당으로 받기
 /*
