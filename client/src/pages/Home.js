@@ -6,7 +6,8 @@ import Axios from "axios";
 //홈 콤포넌트
 function Home() {
   const [snippets, setSnippets] = useState([]); //빈 배열을 안해놔서 생긴 오류 발견 !
-  const [newSnippetEditorOpen, setNewSnippetEditorOpen] = useState(false); // Form 태그 열게 할까 말까
+  const [SnippetEditorOpen, setSnippetEditorOpen] = useState(false); // Form 태그 열게 할까 말까
+  const [editSnippetData, setEditSnippetData] = useState(null);
 
   useEffect(() => {
     getAllSnippets();
@@ -16,6 +17,11 @@ function Home() {
     const snippetsRes = await Axios.get("http://localhost:3000/snippet");
     console.log(snippetsRes);
     setSnippets(snippetsRes.data);
+  }
+
+  function editSnippet(snippetData) {
+    setEditSnippetData(snippetData);
+    setSnippetEditorOpen(true);
   }
 
   function spreadSnippets() {
@@ -33,6 +39,7 @@ function Home() {
           snippet={snippet}
           key={i}
           getAllSnippets={getAllSnippets}
+          editSnippet={editSnippet}
         />
       );
     });
@@ -41,15 +48,17 @@ function Home() {
   return (
     <div className="home">
       <div className="snippetsContainer">
-        {!newSnippetEditorOpen && (
-          <button onClick={() => setNewSnippetEditorOpen(true)}>
+        {!SnippetEditorOpen && (
+          <button onClick={() => setSnippetEditorOpen(true)}>
             스니핏 추가
           </button>
         )}
-        {newSnippetEditorOpen && (
+        {SnippetEditorOpen && (
           <SnippetEditor
-            setNewSnippetEditorOpen={setNewSnippetEditorOpen}
+            setSnippetEditorOpen={setSnippetEditorOpen}
             getAllSnippets={getAllSnippets}
+            editSnippetData={editSnippetData}
+            setEditSnippetData={setEditSnippetData}
           />
         )}
         {spreadSnippets()}

@@ -1,11 +1,11 @@
-import Axios from "axios";
 import React from "react";
+import Axios from "axios";
 
 // 스니핏 콤포넌트
-function Snippet({ snippet, getAllSnippets, ...props }) {
+function Snippet({ snippet, getAllSnippets, editSnippet, ...props }) {
   //딜리트 Axios로 보내기
   async function deleteSnippet() {
-    alert(`${snippet._id}`);
+    alert(`${snippet._id} 삭제함`);
     await Axios.delete(`http://localhost:3000/snippet/${snippet._id}`);
     getAllSnippets();
   }
@@ -20,6 +20,7 @@ function Snippet({ snippet, getAllSnippets, ...props }) {
           <code>{snippet.code}</code>
         </pre>
       )}
+      <button onClick={() => editSnippet(snippet)}>수정</button>
       <button onClick={deleteSnippet}>Delete</button>
       <hr />
     </div>
