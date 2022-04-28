@@ -1,11 +1,26 @@
-// 스니핏 콤포넌트
+import Axios from "axios";
+import React from "react";
 
-function Snippet({ snippet, ...props }) {
+// 스니핏 콤포넌트
+function Snippet({ snippet, getAllSnippets, ...props }) {
+  //딜리트 Axios로 보내기
+  async function deleteSnippet() {
+    alert(`${snippet._id}`);
+    await Axios.delete(`http://localhost:3000/snippet/${snippet._id}`);
+    getAllSnippets();
+  }
+
   return (
     <div className="snippet">
+      {snippet._id && <h2>{snippet._id}</h2>}
       {snippet.title && <h2>{snippet.title}</h2>}
       {snippet.description && <p>{snippet.description}</p>}
-      {snippet.code && <p>{snippet.code}</p>}
+      {snippet.code && (
+        <pre>
+          <code>{snippet.code}</code>
+        </pre>
+      )}
+      <button onClick={deleteSnippet}>Delete</button>
       <hr />
     </div>
   );
