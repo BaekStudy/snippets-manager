@@ -2,7 +2,13 @@ import React from "react";
 import Axios from "axios";
 
 // 스니핏 콤포넌트
-function Snippet({ snippet, getAllSnippets, editSnippet, ...props }) {
+function Snippet({
+  snippet,
+  getAllSnippets,
+  속성아무거나,
+  editSnippet,
+  ...props
+}) {
   //딜리트 Axios로 보내기
   async function deleteSnippet() {
     alert(`${snippet._id} 삭제함`);
@@ -12,6 +18,7 @@ function Snippet({ snippet, getAllSnippets, editSnippet, ...props }) {
 
   return (
     <div className="snippet">
+      {속성아무거나}
       {snippet._id && <h2>{snippet._id}</h2>}
       {snippet.title && <h2>{snippet.title}</h2>}
       {snippet.description && <p>{snippet.description}</p>}
