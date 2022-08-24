@@ -55,7 +55,8 @@ exports.회원가입 = async (req, res) => {
     const token = jwt.sign({ jwtData }, process.env.JWT_SECRET);
     console.log(process.env.JWT_SECRET);
 
-    // 쿠키는 브라우저및 프론트에 데이터를 전달하는 방식이다. 주로 token 보낼때 씀 , 쿠키는 브라우저가 쭉 들고다니는것이다
+    // 쿠키는 브라우저및 프론트에 데이터를 전달하는 방식이다. 주로 token 보낼때 씀 , 쿠키는 브라우저가 쭉 들고다니는것이다.
+    // 토크은 바코드 , 쿠키는 클럽에 달고 다니는 손팔찌
     res.cookie("token", token, { httpOnly: true }).send();
     //res.send({ savedUser, token });
   } catch (error) {
