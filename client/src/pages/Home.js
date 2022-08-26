@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Snippet from "../components/Home/Snippet";
 import SnippetEditor from "../components/Home/SnippetEditor";
+import Navbar from "../components/Home/Navbar";
+
 import Axios from "axios";
 
 //홈 콤포넌트
@@ -47,6 +49,8 @@ function Home() {
 
   return (
     <div className="home">
+      <Navbar />
+
       <div className="snippetsContainer">
         {!SnippetEditorOpen && (
           <button onClick={() => setSnippetEditorOpen(true)}>
