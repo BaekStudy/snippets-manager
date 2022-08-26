@@ -6,9 +6,11 @@ const {
   deleteOneSnippet,
 } = require("../controller/snippetController");
 
-router.post("/", postOneSnippet);
-router.get("/", getAllSnippets);
-router.put("/:id", updateOneSnippet);
-router.delete("/:id", deleteOneSnippet);
+const auth = require("../middleware/auth");
+
+router.post("/", auth, postOneSnippet);
+router.get("/", auth, getAllSnippets);
+router.put("/:id", auth, updateOneSnippet);
+router.delete("/:id", auth, deleteOneSnippet);
 
 module.exports = router;

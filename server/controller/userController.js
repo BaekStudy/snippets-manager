@@ -28,7 +28,7 @@ exports.회원가입 = async (req, res) => {
     const existingUser = await UserModel.findOne({ email });
     if (existingUser)
       return res.status(400).json({
-        errorMessage: "Please enter the same twice for verification.",
+        errorMessage: "이미 해당 아이디가 있습니다.",
       });
 
     // hash the password
@@ -53,12 +53,10 @@ exports.회원가입 = async (req, res) => {
     };
 
     const token = jwt.sign({ jwtData }, process.env.JWT_SECRET);
-    console.log(process.env.JWT_SECRET);
 
-    // 쿠키는 브라우저및 프론트에 데이터를 전달하는 방식이다. 주로 token 보낼때 씀 , 쿠키는 브라우저가 쭉 들고다니는것이다.
-    // 토크은 바코드 , 쿠키는 클럽에 달고 다니는 손팔찌
-    res.cookie("token", token, { httpOnly: true }).send();
-    //res.send({ savedUser, token });
+    /**  쿠키는 브라우저및 프론트에 데이터를 전달하는 방식이다. 주로 token 보낼때 씀 , 쿠키는 브라우저가 쭉 들고다니는것이다.
+     토크은 바코드 , 쿠키는 클럽에 달고 다니는 손팔찌*/
+    res.cookie("token", token, { httpOnly: true }).send({ savedUser, token });
   } catch (error) {
     res.status(500).send(error);
   }

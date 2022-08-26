@@ -15,6 +15,7 @@ exports.postOneSnippet = async (req, res) => {
       title,
       description,
       code,
+      user: req.user,
     });
 
     const savedSnippet = await newSnippet.save();
@@ -31,7 +32,7 @@ exports.postOneSnippet = async (req, res) => {
 // Read [v]
 exports.getAllSnippets = async (req, res) => {
   try {
-    const snippets = await snippetModel.find();
+    const snippets = await snippetModel.find({ user: req.user });
     res.json(snippets);
   } catch (error) {
     res.json({

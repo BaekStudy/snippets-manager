@@ -5,6 +5,7 @@ const SnippetModel = mongoose.Schema(
     title: { type: String },
     description: { type: String },
     code: { type: String },
+    user: { type: mongoose.Schema.Types.ObjectId, required: true },
   },
   {
     timestamps: true,
