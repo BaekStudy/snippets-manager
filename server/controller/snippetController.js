@@ -65,6 +65,9 @@ exports.updateOneSnippet = async (req, res) => {
       });
     }
 
+    if (originalSnippet.user.toString() !== req.user)
+      return res.status(401).json({ errorMessage: "수정권한이 없습니다." });
+
     originalSnippet.title = title;
     originalSnippet.description = description;
     originalSnippet.code = code;
@@ -95,6 +98,9 @@ exports.deleteOneSnippet = async (req, res) => {
         errorMessage: "No snippet ID",
       });
     }
+
+    if (existingSnippet.user.toString() !== req.user)
+      return res.status(401).json({ errorMessage: "삭제권한이 없습니다." });
 
     await existingSnippet.delete();
     res.json(existingSnippet);

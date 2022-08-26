@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 function auth(req, res, next) {
   try {
     const token = req.cookies.token;
-    token ? console.log(token) : console.log("토큰 없음");
+    // token ? console.log(token) : console.log("토큰 없음");
 
     if (!token)
       return res.staus(401).json({ errorMessage: "권한이 없습니다." });
@@ -11,7 +11,7 @@ function auth(req, res, next) {
     const validateUser = jwt.verify(token, process.env.JWT_SECRET);
 
     req.user = validateUser.jwtData.id;
-    console.log(req.user);
+    //console.log(req.user);
 
     next();
   } catch (err) {
