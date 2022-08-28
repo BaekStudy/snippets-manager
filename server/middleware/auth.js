@@ -19,4 +19,9 @@ function auth(req, res, next) {
   }
 }
 
+function 구글오쓰(req, res, next) {
+  passport.authenticate("google", { scope: ["profile"] });
+  next();
+}
+
 module.exports = auth;

@@ -21,6 +21,7 @@ app.use(cookieParser()); //쿠키파서 쓰는 이유 : jsonwebtoken에서 Auth 
 // set up routers
 app.use("/snippet", require("./routers/snippetRouter"));
 app.use("/userAuth", require("./routers/userRouter"));
+app.use("/authPassport", require("./routers/authPassportRouter"));
 
 app.listen(process.env.PORT, () =>
   console.log(`Server started on port ${process.env.PORT}`)
